@@ -1,0 +1,184 @@
+﻿<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2">
+<Document>
+<open>1</open>
+<visibility>1</visibility>
+<name>12 mars 2026 18:00:16</name>
+<atom:author>
+<atom:name>Enregistré par Geo Tracker pour Android de Ilya Bogdanovich</atom:name>
+</atom:author>
+<atom:link href="https://play.google.com/store/apps/details?id=com.ilyabogdanovich.geotracker" />
+<TimeStamp>
+<when>2026-03-12T17:00:16.608Z</when>
+</TimeStamp>
+<Style id="track">
+<LineStyle>
+<color>ffff9509</color>
+<width>4</width>
+</LineStyle>
+</Style>
+<Schema id="geotrackerTrackSchema">
+<gx:SimpleArrayField name="speed" type="float">
+<displayName>Speed, meters per second</displayName>
+</gx:SimpleArrayField>
+<gx:SimpleArrayField name="course" type="float">
+<displayName>Course, radians</displayName>
+</gx:SimpleArrayField>
+</Schema>
+<Placemark id="tour">
+<name>12 mars 2026 18:00:16</name>
+<atom:author>
+<atom:name>Enregistré par Geo Tracker pour Android de Ilya Bogdanovich</atom:name>
+</atom:author>
+<atom:link href="https://play.google.com/store/apps/details?id=com.ilyabogdanovich.geotracker" />
+<ExtendedData>
+<Data name="activity">
+<value>0</value>
+</Data>
+</ExtendedData>
+<TimeSpan>
+<begin>2026-03-12T17:00:16.608Z</begin>
+<end>2026-03-12T17:12:16.333Z</end>
+</TimeSpan>
+<styleUrl>#track</styleUrl>
+<gx:MultiTrack>
+<altitudeMode>absolute</altitudeMode>
+<gx:interpolate>0</gx:interpolate>
+<gx:Track>
+<when>2026-03-12T17:00:24Z</when>
+<when>2026-03-12T17:02:14Z</when>
+<when>2026-03-12T17:02:21Z</when>
+<when>2026-03-12T17:02:28Z</when>
+<when>2026-03-12T17:02:35Z</when>
+<when>2026-03-12T17:02:43Z</when>
+<when>2026-03-12T17:02:51Z</when>
+<when>2026-03-12T17:02:58Z</when>
+<when>2026-03-12T17:03:05Z</when>
+<when>2026-03-12T17:03:13Z</when>
+<when>2026-03-12T17:03:21Z</when>
+<when>2026-03-12T17:03:28Z</when>
+<when>2026-03-12T17:03:35Z</when>
+<when>2026-03-12T17:03:43Z</when>
+<when>2026-03-12T17:03:50Z</when>
+<when>2026-03-12T17:03:58Z</when>
+<when>2026-03-12T17:04:06Z</when>
+<when>2026-03-12T17:04:14Z</when>
+<when>2026-03-12T17:04:22Z</when>
+<when>2026-03-12T17:04:30Z</when>
+<when>2026-03-12T17:04:37Z</when>
+<when>2026-03-12T17:04:44Z</when>
+<when>2026-03-12T17:04:51Z</when>
+<when>2026-03-12T17:04:58Z</when>
+<when>2026-03-12T17:05:06Z</when>
+<when>2026-03-12T17:05:13Z</when>
+<when>2026-03-12T17:05:20Z</when>
+<when>2026-03-12T17:05:29Z</when>
+<when>2026-03-12T17:05:37Z</when>
+<when>2026-03-12T17:05:45Z</when>
+<when>2026-03-12T17:05:53Z</when>
+<when>2026-03-12T17:06:00Z</when>
+<when>2026-03-12T17:06:07Z</when>
+<when>2026-03-12T17:06:15Z</when>
+<when>2026-03-12T17:06:23Z</when>
+<when>2026-03-12T17:06:30Z</when>
+<when>2026-03-12T17:06:38Z</when>
+<when>2026-03-12T17:06:47Z</when>
+<when>2026-03-12T17:06:54Z</when>
+<when>2026-03-12T17:07:01Z</when>
+<when>2026-03-12T17:07:08Z</when>
+<when>2026-03-12T17:07:15Z</when>
+<when>2026-03-12T17:07:22Z</when>
+<when>2026-03-12T17:07:29Z</when>
+<when>2026-03-12T17:07:37Z</when>
+<when>2026-03-12T17:07:45Z</when>
+<when>2026-03-12T17:07:53Z</when>
+<when>2026-03-12T17:08:01Z</when>
+<when>2026-03-12T17:08:09Z</when>
+<when>2026-03-12T17:08:17Z</when>
+<when>2026-03-12T17:08:24Z</when>
+<when>2026-03-12T17:08:31Z</when>
+<when>2026-03-12T17:08:38Z</when>
+<when>2026-03-12T17:08:45Z</when>
+<when>2026-03-12T17:08:52Z</when>
+<when>2026-03-12T17:08:59Z</when>
+<when>2026-03-12T17:09:06Z</when>
+<when>2026-03-12T17:09:13Z</when>
+<when>2026-03-12T17:09:20Z</when>
+<when>2026-03-12T17:09:27Z</when>
+<when>2026-03-12T17:09:34Z</when>
+<when>2026-03-12T17:09:41Z</when>
+<when>2026-03-12T17:09:48Z</when>
+<when>2026-03-12T17:09:55Z</when>
+<when>2026-03-12T17:11:06Z</when>
+<when>2026-03-12T17:11:20Z</when>
+<gx:coord>6.11046848 49.60619307 334.38</gx:coord>
+<gx:coord>6.11027466 49.60610009 335.19</gx:coord>
+<gx:coord>6.11025226 49.60619863 334</gx:coord>
+<gx:coord>6.11019053 49.60628371 334.79</gx:coord>
+<gx:coord>6.11015324 49.60637318 333.93</gx:coord>
+<gx:coord>6.11015367 49.60647116 333.94</gx:coord>
+<gx:coord>6.11027127 49.60653168 333.72</gx:coord>
+<gx:coord>6.11040309 49.60656338 333.47</gx:coord>
+<gx:coord>6.11053232 49.60661407 334.1</gx:coord>
+<gx:coord>6.11067875 49.60664669 333.72</gx:coord>
+<gx:coord>6.11082872 49.60663219 332.58</gx:coord>
+<gx:coord>6.11095923 49.60660138 331.39</gx:coord>
+<gx:coord>6.11109489 49.60658042 331.08</gx:coord>
+<gx:coord>6.1112361 49.606539 331.61</gx:coord>
+<gx:coord>6.11136654 49.60650545 330.33</gx:coord>
+<gx:coord>6.11151588 49.60647247 331</gx:coord>
+<gx:coord>6.11164041 49.60642005 330.71</gx:coord>
+<gx:coord>6.11177929 49.60638999 330.1</gx:coord>
+<gx:coord>6.11192503 49.60636643 330.84</gx:coord>
+<gx:coord>6.11207766 49.6063389 330.82</gx:coord>
+<gx:coord>6.11221259 49.60631156 330.67</gx:coord>
+<gx:coord>6.11235075 49.60628342 330.3</gx:coord>
+<gx:coord>6.11248718 49.60625769 330.87</gx:coord>
+<gx:coord>6.11261807 49.60622667 330.42</gx:coord>
+<gx:coord>6.11272006 49.60616013 331.07</gx:coord>
+<gx:coord>6.11284408 49.6061124 330.85</gx:coord>
+<gx:coord>6.1129754 49.60607893 331.69</gx:coord>
+<gx:coord>6.11307335 49.60601057 330.11</gx:coord>
+<gx:coord>6.11304185 49.60591905 329.59</gx:coord>
+<gx:coord>6.11299695 49.60582502 329.52</gx:coord>
+<gx:coord>6.11295654 49.60572831 329.34</gx:coord>
+<gx:coord>6.11292269 49.60563987 329.09</gx:coord>
+<gx:coord>6.11288754 49.6055522 328.84</gx:coord>
+<gx:coord>6.11276691 49.60549799 328.72</gx:coord>
+<gx:coord>6.11262667 49.60545568 328.36</gx:coord>
+<gx:coord>6.11249644 49.60542378 328.2</gx:coord>
+<gx:coord>6.11238173 49.60548208 329.29</gx:coord>
+<gx:coord>6.11222871 49.60549362 330.18</gx:coord>
+<gx:coord>6.11213478 49.60542679 329.12</gx:coord>
+<gx:coord>6.11209217 49.6053389 328.9</gx:coord>
+<gx:coord>6.11205144 49.60524996 328.4</gx:coord>
+<gx:coord>6.11201731 49.60516116 327.9</gx:coord>
+<gx:coord>6.11197747 49.60507484 328.24</gx:coord>
+<gx:coord>6.11193432 49.60498523 328.65</gx:coord>
+<gx:coord>6.11188225 49.60489378 328.3</gx:coord>
+<gx:coord>6.11178917 49.60482057 327.75</gx:coord>
+<gx:coord>6.11163591 49.60481419 327.03</gx:coord>
+<gx:coord>6.11149182 49.60482389 327.75</gx:coord>
+<gx:coord>6.1113872 49.60489274 327.57</gx:coord>
+<gx:coord>6.11130759 49.60498144 326.89</gx:coord>
+<gx:coord>6.11124286 49.60506306 326.83</gx:coord>
+<gx:coord>6.11116691 49.60513959 327.65</gx:coord>
+<gx:coord>6.11110111 49.60522659 328.04</gx:coord>
+<gx:coord>6.11103869 49.60530863 327.74</gx:coord>
+<gx:coord>6.11098015 49.6053924 327.9</gx:coord>
+<gx:coord>6.11090882 49.60547206 328.95</gx:coord>
+<gx:coord>6.11083569 49.60555974 329.9</gx:coord>
+<gx:coord>6.11076071 49.60564364 330.15</gx:coord>
+<gx:coord>6.11068381 49.60573252 330.17</gx:coord>
+<gx:coord>6.11064245 49.60581879 331.2</gx:coord>
+<gx:coord>6.11057907 49.60590468 332.63</gx:coord>
+<gx:coord>6.11051673 49.60600004 333.07</gx:coord>
+<gx:coord>6.11044865 49.60609272 333.47</gx:coord>
+<gx:coord>6.11042709 49.60618308 333.73</gx:coord>
+<gx:coord>6.11055952 49.60613329 350.38</gx:coord>
+<gx:coord>6.11044366 49.60619724 344.76</gx:coord>
+</gx:Track>
+</gx:MultiTrack>
+</Placemark>
+</Document>
+</kml>
