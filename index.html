@@ -138,8 +138,8 @@
 
         <section class="map-section">
             <div class="section-header">
-                <h2>Cartographie de la Mission</h2>
-                <p class="data-info">Visualisation spatiale des relevés de pollution</p>
+                <h2>Cartographie de la Mission 1</h2>
+                <p class="data-info">Mission du 10 Mars 2026 : Parc de Merl</p>
             </div>
             
             <div class="map-controls">
@@ -165,6 +165,59 @@
             </div>
             
             <div id="pollution-map" style="height: 500px; border-radius: 10px; overflow: hidden;"></div>
+            
+            <div class="map-legend">
+                <h3>Légende</h3>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #00ff00;"></span>
+                        <span>Faible</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #ffff00;"></span>
+                        <span>Modéré</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #ff9900;"></span>
+                        <span>Élevé</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color" style="background: #ff0000;"></span>
+                        <span>Très élevé</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="map-section">
+            <div class="section-header">
+                <h2>Cartographie de la Mission 2</h2>
+                <p class="data-info">Mission du 13 Mars 2026 : Forum Geesseknäppchen</p>
+            </div>
+            
+            <div class="map-controls">
+                <label>Sélectionnez le polluant à visualiser : </label>
+                <div class="map-radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="map-pollutant-2" value="co" checked>
+                        <span>CO</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="map-pollutant-2" value="co2">
+                        <span>CO₂</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="map-pollutant-2" value="pm25">
+                        <span>PM2.5</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="map-pollutant-2" value="pm10">
+                        <span>PM10</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div id="pollution-map-2" style="height: 500px; border-radius: 10px; overflow: hidden;"></div>
             
             <div class="map-legend">
                 <h3>Légende</h3>
