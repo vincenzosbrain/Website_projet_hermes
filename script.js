@@ -325,6 +325,23 @@ let measurementData2 = {
     hum: []
 };
 
+// Variables pour la troisième carte (Naples)
+let map3;
+let markers3 = [];
+let gpsData3 = [];
+let pollutionMapData3 = [];
+let measurementData3 = {
+    timestamps: [],
+    co: [],
+    no2: [],
+    nh3: [],
+    pm25: [],
+    pm10: [],
+    co2: [],
+    temp: [],
+    hum: []
+};
+
 // Fonction pour parser le fichier KML
 async function loadGPSData() {
     try {
@@ -400,6 +417,8 @@ function getPollutionColor(value, pollutant) {
     const thresholds = {
         co: { low: 0.3, medium: 0.5, high: 1.0 },
         co2: { low: 800, medium: 1200, high: 1600 },
+        no2: { low: 0.1, medium: 0.2, high: 0.4 },
+        nh3: { low: 0.2, medium: 0.5, high: 1.0 },
         pm25: { low: 3, medium: 5, high: 8 },
         pm10: { low: 15, medium: 25, high: 35 }
     };
@@ -515,6 +534,10 @@ window.addEventListener('DOMContentLoaded', () => {
     // Charger et initialiser la deuxième carte
     loadData2().then(() => {
         initMap2();
+    });
+    // Charger et initialiser la troisième carte (Naples)
+    loadData3().then(() => {
+        initMap3();
     });
 });
 
@@ -745,5 +768,238 @@ function updateMapMarkers2(pollutant) {
     }).addTo(map2);
     
     markers2.push(polyline);
+}
+
+// ===== FONCTIONS POUR LA TROISIÈME CARTE (NAPLES) =====
+
+// Fonction pour charger les données de la troisième mission (Naples)
+async function loadData3() {
+    try {
+        const response = await fetch('naples_data.txt');
+        const text = await response.text();
+        const lines = text.split('\n');
+        
+        // Parcourir chaque ligne
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (!line) continue;
+            
+            // Vérifier si c'est une ligne de mesures (avec timestamp)
+            const timeMatch = line.match(/^(\d+)s/);
+            if (timeMatch) {
+                const time = parseInt(timeMatch[1]);
+                
+                // Format: 0s | CO:6.227170895338823 | NO2:0.09044844737191406 | NH3:6.257811453839366 | CO2:1215 | T:22.33 | H:59.607 | P:1017.61 | GAS:4523.4 | PM25:4.8 | PM10:15.6
+                const coMatch = line.match(/CO:([\d.]+)/);
+                const no2Match = line.match(/NO2:([\d.]+)/);
+                const nh3Match = line.match(/NH3:([\d.]+)/);
+                const co2Match = line.match(/CO2:([\d.]+)/);
+                const pm25Match = line.match(/PM25:([\d.]+)/);
+                const pm10Match = line.match(/PM10:([\d.]+)/);
+                const tempMatch = line.match(/T:([\d.]+)/);
+                const humMatch = line.match(/H:([\d.]+)/);
+                
+                if (coMatch && co2Match && pm25Match && pm10Match && no2Match && nh3Match) {
+                    measurementData3.timestamps.push(time);
+                    measurementData3.co.push(parseFloat(coMatch[1]));
+                    measurementData3.no2.push(parseFloat(no2Match[1]));
+                    measurementData3.nh3.push(parseFloat(nh3Match[1]));
+                    measurementData3.co2.push(parseInt(co2Match[1]));
+                    measurementData3.pm25.push(parseFloat(pm25Match[1]));
+                    measurementData3.pm10.push(parseFloat(pm10Match[1]));
+                    measurementData3.temp.push(tempMatch ? parseFloat(tempMatch[1]) : 0);
+                    measurementData3.hum.push(humMatch ? parseFloat(humMatch[1]) : 0);
+                }
+            }
+        }
+        
+        console.log(`Données mission 3 (Naples) chargées: ${measurementData3.timestamps.length} mesures`);
+        
+    } catch (error) {
+        console.error('Erreur lors du chargement des données mission 3 (Naples):', error);
+    }
+}
+
+// Fonction pour parser le fichier GPX de la mission 3 (Naples)
+async function loadGPSData3() {
+    try {
+        const response = await fetch('naples_coord.gpx');
+        const text = await response.text();
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(text, 'text/xml');
+        
+        // Dans un fichier GPX, les points sont dans des éléments <trkpt>
+        const trkptElements = xmlDoc.getElementsByTagName('trkpt');
+        
+        const gpsPoints = [];
+        for (let i = 0; i < trkptElements.length; i++) {
+            const trkpt = trkptElements[i];
+            const lat = parseFloat(trkpt.getAttribute('lat'));
+            const lon = parseFloat(trkpt.getAttribute('lon'));
+            
+            // Récupérer l'altitude et le temps
+            const eleElement = trkpt.getElementsByTagName('ele')[0];
+            const timeElement = trkpt.getElementsByTagName('time')[0];
+            
+            if (eleElement && timeElement) {
+                const alt = parseFloat(eleElement.textContent);
+                const timestamp = new Date(timeElement.textContent);
+                
+                gpsPoints.push({
+                    timestamp: timestamp,
+                    lon: lon,
+                    lat: lat,
+                    alt: alt
+                });
+            }
+        }
+        
+        console.log(`Points GPS Naples chargés: ${gpsPoints.length}`);
+        return gpsPoints;
+    } catch (error) {
+        console.error('Erreur lors du chargement des données GPS mission 3 (Naples):', error);
+        return [];
+    }
+}
+
+// Fonction pour associer les données de pollution aux points GPS (mission 3 - Naples)
+function mergePollutionWithGPS3(gpsPoints) {
+    const merged = [];
+    
+    if (gpsPoints.length === 0 || measurementData3.timestamps.length === 0) {
+        return merged;
+    }
+    
+    const startTime = gpsPoints[0].timestamp;
+    
+    for (let i = 0; i < gpsPoints.length; i++) {
+        const gpsPoint = gpsPoints[i];
+        
+        // Calculer l'index approximatif dans les données de pollution
+        const secondsFromStart = Math.round((gpsPoint.timestamp - startTime) / 1000);
+        
+        // Trouver les données de pollution correspondantes
+        const idx = measurementData3.timestamps.findIndex(t => t >= secondsFromStart);
+        
+        if (idx !== -1) {
+            merged.push({
+                lat: gpsPoint.lat,
+                lon: gpsPoint.lon,
+                alt: gpsPoint.alt,
+                timestamp: gpsPoint.timestamp,
+                co: measurementData3.co[idx],
+                no2: measurementData3.no2[idx],
+                nh3: measurementData3.nh3[idx],
+                co2: measurementData3.co2[idx],
+                pm25: measurementData3.pm25[idx],
+                pm10: measurementData3.pm10[idx]
+            });
+        }
+    }
+    
+    return merged;
+}
+
+// Initialiser la troisième carte (Naples)
+async function initMap3() {
+    // Charger les données GPS
+    gpsData3 = await loadGPSData3();
+    
+    if (gpsData3.length === 0) {
+        console.error('Aucune donnée GPS chargée pour mission 3 (Naples)');
+        return;
+    }
+    
+    // Fusionner avec les données de pollution
+    pollutionMapData3 = mergePollutionWithGPS3(gpsData3);
+    
+    if (pollutionMapData3.length === 0) {
+        console.error('Aucune donnée de pollution fusionnée pour mission 3 (Naples)');
+        return;
+    }
+    
+    // Calculer le centre de la carte
+    const centerLat = gpsData3.reduce((sum, p) => sum + p.lat, 0) / gpsData3.length;
+    const centerLon = gpsData3.reduce((sum, p) => sum + p.lon, 0) / gpsData3.length;
+    
+    // Créer la carte
+    map3 = L.map('pollution-map-3').setView([centerLat, centerLon], 17);
+    
+    // Ajouter la couche de tuiles OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 19
+    }).addTo(map3);
+    
+    // Afficher les marqueurs pour le polluant sélectionné
+    updateMapMarkers3('co');
+    
+    // Event listeners pour les boutons radio
+    document.querySelectorAll('input[name="map-pollutant-3"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            updateMapMarkers3(e.target.value);
+        });
+    });
+}
+
+// Mettre à jour les marqueurs sur la troisième carte (Naples)
+function updateMapMarkers3(pollutant) {
+    // Supprimer les anciens marqueurs
+    markers3.forEach(marker => map3.removeLayer(marker));
+    markers3 = [];
+    
+    // Ajouter les nouveaux marqueurs
+    pollutionMapData3.forEach((point, index) => {
+        const value = point[pollutant];
+        const color = getPollutionColor(value, pollutant);
+        
+        // Créer une icône personnalisée
+        const icon = L.divIcon({
+            className: 'custom-marker',
+            html: `<div style="background-color: ${color}; width: 15px; height: 15px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 4px rgba(0,0,0,0.5);"></div>`,
+            iconSize: [15, 15]
+        });
+        
+        // Créer le marqueur
+        const marker = L.marker([point.lat, point.lon], { icon: icon }).addTo(map3);
+        
+        // Ajouter un popup avec les informations
+        const pollutantNames = {
+            co: 'CO',
+            no2: 'NO₂',
+            nh3: 'NH₃',
+            co2: 'CO₂',
+            pm25: 'PM2.5',
+            pm10: 'PM10'
+        };
+        
+        const units = {
+            co: 'ppm',
+            no2: 'ppm',
+            nh3: 'ppm',
+            co2: 'ppm',
+            pm25: 'μg/m³',
+            pm10: 'μg/m³'
+        };
+        
+        marker.bindPopup(`
+            <b>Point ${index + 1}</b><br>
+            <b>${pollutantNames[pollutant]}:</b> ${value.toFixed(2)} ${units[pollutant]}<br>
+            <small>Lat: ${point.lat.toFixed(6)}, Lon: ${point.lon.toFixed(6)}</small>
+        `);
+        
+        markers3.push(marker);
+    });
+    
+    // Tracer la trajectoire
+    const coordinates = pollutionMapData3.map(p => [p.lat, p.lon]);
+    const polyline = L.polyline(coordinates, {
+        color: '#00d4ff',
+        weight: 2,
+        opacity: 0.6,
+        dashArray: '5, 5'
+    }).addTo(map3);
+    
+    markers3.push(polyline);
 }
 
